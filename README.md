@@ -17,7 +17,7 @@ third, create an .env file for env variables within the root directories with th
 - DATABASE_URI (for your MongoDB uri string)
 - PORT
 - ORIGIN (used if you have a frontend site, (use `http://localhost:8000` if don't have any))
-- TOKEN_SECRET (whatever you want, used in JWT)
+- TOKEN_SECRET (whatever you want, used in JWT) // for LOGIN
 
 fourth, run the server:
 ```bash

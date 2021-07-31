@@ -25,7 +25,7 @@ async function run() {
 }
 
 function getCollection(collectionName) {
-  return client.db('dataindukkependudukan').collection(collectionName);
+  return client.db('DataInduk').collection(collectionName);
 }
 
 module.exports = { run, getCollection, oid}
