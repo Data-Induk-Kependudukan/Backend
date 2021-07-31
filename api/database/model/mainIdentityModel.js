@@ -1,6 +1,5 @@
 const mainIdentityModelInsert = (data) => {
     return {
-        // Sesuaikan nama field dengan yang ada di MongoDB app
         nik: data.nik,
         namalengkap: data.namalengkap,
         tempatlahir: data.tempatlahir,
