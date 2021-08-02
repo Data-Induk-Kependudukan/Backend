@@ -133,12 +133,74 @@ exports.getDokumenPendudukWithMainIdentity = async (req, res) => {
     }
 }
 
+//join with dokumen penduduk by NIK
+exports.getDokumenPendudukWithMainIdentityByNIK = async (req, res) => {
+    const mainIdentity = getCollection('MainIdentity');
+    try {
+        const NIK = req.params.NIK;
+        let dokumenpendudukResult = [];
+        dokumenpendudukResult = await mainIdentity.aggregate([
+            {
+                $match: {
+                    NIK: NIK
+                }
+            },
+            {
+                $lookup: {
+                    from: 'DokumenPenduduk',
+                    localField: 'NIK',
+                    foreignField: 'NIK',
+                    as: 'DokumenPenduduk'
+                }
+            }
+        ]).toArray();
+        if (!dokumenpendudukResult) {
+            res.status(404).send('DokumenPenduduk not found');
+            return;
+        }
+        res.status(200).json(dokumenpendudukResult);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 //join with lembaga kepolisan
 exports.getLembagaKepolisianWithMainIdentity = async (req, res) => {
     const mainIdentity = getCollection('MainIdentity');
     try {
         let lembagaKepolisianResult = [];
         lembagaKepolisianResult = await mainIdentity.aggregate([
+            {
+                $lookup: {
+                    from: 'LembagaKepolisian',
+                    localField: 'NIK',
+                    foreignField: 'NIK',
+                    as: 'DataKriminal'
+                }
+            }
+        ]).toArray();
+        if (!lembagaKepolisianResult) {
+            res.status(404).send('LembagaKepolisian not found');
+            return;
+        }
+        res.status(200).json(lembagaKepolisianResult);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//join with lembaga kepolisan by NIK
+exports.getLembagaKepolisianWithMainIdentityByNIK = async (req, res) => {
+    const mainIdentity = getCollection('MainIdentity');
+    try {
+        const NIK = req.params.NIK;
+        let lembagaKepolisianResult = [];
+        lembagaKepolisianResult = await mainIdentity.aggregate([
+            {
+                $match: {
+                    NIK: NIK
+                }
+            },
             {
                 $lookup: {
                     from: 'LembagaKepolisian',
@@ -183,6 +245,37 @@ exports.getLembagaKeuanganWithMainIdentity = async (req, res) => {
     }
 }
 
+//join with lembaga keuangan by NIK
+exports.getLembagaKeuanganWithMainIdentityByNIK = async (req, res) => {
+    const mainIdentity = getCollection('MainIdentity');
+    try {
+        const NIK = req.params.NIK;
+        let lembagaKeuanganResult = [];
+        lembagaKeuanganResult = await mainIdentity.aggregate([
+            {
+                $match: {
+                    NIK: NIK
+                }
+            },
+            {
+                $lookup: {
+                    from: 'LembagaKeuangan',
+                    localField: 'NIK',
+                    foreignField: 'NIK',
+                    as: 'DataKeuangan'
+                }
+            }
+        ]).toArray();
+        if (!lembagaKeuanganResult) {
+            res.status(404).send('LembagaKeuangan not found');
+            return;
+        }
+        res.status(200).json(lembagaKeuanganResult);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 //join with lembaga medis
 exports.getLembagaMedisWithMainIdentity = async (req, res) => {
     const mainIdentity = getCollection('MainIdentity');
@@ -208,12 +301,74 @@ exports.getLembagaMedisWithMainIdentity = async (req, res) => {
     }
 }
 
+//join with lembaga medis by NIK
+exports.getLembagaMedisWithMainIdentityByNIK = async (req, res) => {
+    const mainIdentity = getCollection('MainIdentity');
+    try {
+        const NIK = req.params.NIK;
+        let lembagaMedisResult = [];
+        lembagaMedisResult = await mainIdentity.aggregate([
+            {
+                $match: {
+                    NIK: NIK
+                }
+            },
+            {
+                $lookup: {
+                    from: 'LembagaMedis',
+                    localField: 'NIK',
+                    foreignField: 'NIK',
+                    as: 'DataMedis'
+                }
+            }
+        ]).toArray();
+        if (!lembagaMedisResult) {
+            res.status(404).send('LembagaMedis not found');
+            return;
+        }
+        res.status(200).json(lembagaMedisResult);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 //join with lembaga pendidikan
 exports.getLembagaPendidikanWithMainIdentity = async (req, res) => {
     const mainIdentity = getCollection('MainIdentity');
     try {
         let lembagaPendidikanResult = [];
         lembagaPendidikanResult = await mainIdentity.aggregate([
+            {
+                $lookup: {
+                    from: 'LembagaPendidikan',
+                    localField: 'NIK',
+                    foreignField: 'NIK',
+                    as: 'DataPendidikan'
+                }
+            }
+        ]).toArray();
+        if (!lembagaPendidikanResult) {
+            res.status(404).send('LembagaPendidikan not found');
+            return;
+        }
+        res.status(200).json(lembagaPendidikanResult);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//join with lembaga pendidikan by NIK
+exports.getLembagaPendidikanWithMainIdentityByNIK = async (req, res) => {
+    const mainIdentity = getCollection('MainIdentity');
+    try {
+        const NIK = req.params.NIK;
+        let lembagaPendidikanResult = [];
+        lembagaPendidikanResult = await mainIdentity.aggregate([
+            {
+                $match: {
+                    NIK: NIK
+                }
+            },
             {
                 $lookup: {
                     from: 'LembagaPendidikan',
