@@ -75,3 +75,25 @@ exports.deleteLembagaKepolisian = async (req, res) => {
         console.log(error);
     }
 }
+
+//read by NIK
+exports.getLembagaKepolisianByNIK = async (req, res) => {
+    const lembagaKepolisian = getCollection('LembagaKepolisian');
+    try {
+        const NIK = req.params.NIK;
+        if (!NIK) {
+            res.status(404).send('Invalid NIK');
+            return;
+        }
+
+        const result = await lembagaKepolisian.findOne({ NIK: NIK })
+        if (!result) {
+            res.status(404).send('LembagaKepolisian not found');
+            return;
+        }
+        res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+    }
+}

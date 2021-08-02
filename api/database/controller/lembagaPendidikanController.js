@@ -75,3 +75,25 @@ exports.deleteLembagaPendidikan = async (req, res) => {
         console.log(error);
     }
 }
+
+//read by nik
+exports.getLembagaPendidikanByNIK = async (req, res) => {
+    const lembagaPendidikan = getCollection('LembagaPendidikan');
+    try {
+        const NIK = req.params.NIK;
+        if (!NIK) {
+            res.status(404).send('Invalid NIK');
+            return;
+        }
+
+        const result = await lembagaPendidikan.findOne({ NIK: NIK })
+        if (!result) {
+            res.status(404).send('LembagaPendidikan not found');
+            return;
+        }
+        res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+    }
+}

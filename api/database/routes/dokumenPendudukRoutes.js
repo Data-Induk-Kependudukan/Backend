@@ -7,6 +7,7 @@ module.exports = (app) => {
 
     app.route('/dokumenPenduduk/:NIK')
         .put(dokumenPenduduk.updateDokumenPenduduk)
+        .get(dokumenPenduduk.getDokumenPendudukByNIK);
 
     app.route('/dokumenPenduduk/:NIK')
         .delete(dokumenPenduduk.deleteDokumenPenduduk)

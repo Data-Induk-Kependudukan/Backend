@@ -75,3 +75,25 @@ exports.deleteLembagaMedis = async (req, res) => {
         console.log(error);
     }
 }
+
+//read by NIK
+exports.getLembagaMedisByNIK = async (req, res) => {
+    const lembagaMedis = getCollection('LembagaMedis');
+    try {
+        const NIK = req.params.NIK;
+        if (!NIK) {
+            res.status(404).send('Invalid NIK');
+            return;
+        }
+
+        const result = await lembagaMedis.findOne({ NIK: NIK })
+        if (!result) {
+            res.status(404).send('LembagaMedis not found');
+            return;
+        }
+        res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+    }
+}

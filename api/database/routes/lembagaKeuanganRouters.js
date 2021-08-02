@@ -7,6 +7,7 @@ module.exports = (app) => {
 
     app.route('/lembagaKeuangan/:NIK')
         .put(lembagaKeuangan.updateLembagaKeuangan)
+        .get(lembagaKeuangan.getLembagaKeuanganByNIK);
 
     app.route('/lembagaKeuangan/:NIK')
         .delete(lembagaKeuangan.deleteLembagaKeuangan)
