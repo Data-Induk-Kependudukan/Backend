@@ -44,7 +44,7 @@ const mainIdentityModelUpdate = (data) => {
         sts_kawin: data.sts_kawin,
         pekerjaan: data.pekerjaan,
         kewarganegaraan: data.kewarganegaraan,
-        tgl_pembuatan: data.tgl_pembuatan,
+        tgl_pembuatan: new Date(),
         foto: data.foto
     };
 };
