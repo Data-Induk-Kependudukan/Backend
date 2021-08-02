@@ -9,7 +9,7 @@ const mainIdentityModelInsert = (data) => {
         alamat: {
             alamat: data.alamat.Alamat,
             RT: data.alamat.RT,
-            rw: data.alamat.RW,
+            RW: data.alamat.RW,
             KelDesa: data.alamat.KelDesa,
             Kec: data.alamat.Kec,
             KabKot: data.alamat.KabKot,
