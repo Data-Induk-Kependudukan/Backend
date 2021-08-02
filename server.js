@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors(corsOptions));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 app.get('/', (req, res) => {
   res.status(200).send('Connect zhar aman');
